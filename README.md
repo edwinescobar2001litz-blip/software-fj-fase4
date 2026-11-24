@@ -33,6 +33,25 @@ py -3 menu.py            # 10. Modo interactivo
 
 También puede ejecutarse `py -3 -m unittest -v pruebas` para el detalle de las pruebas.
 
+## Ejecución en Visual Studio Code
+
+El proyecto incluye configuración en `.vscode/`:
+
+1. Abre la carpeta del proyecto en VS Code (`Archivo > Abrir carpeta...`).
+2. Instala la extensión **Python** (se sugiere automáticamente al abrir el proyecto).
+3. Selecciona el intérprete: `Ctrl+Shift+P` → *Python: Select Interpreter* → elige Python 3.8+.
+4. Pulsa **F5** y selecciona una de estas configuraciones:
+   - `Software FJ: simulación (main.py)` → ejecuta las 24 operaciones.
+   - `Software FJ: modo interactivo (menu.py)` → abre el menú por consola.
+   - `Software FJ: pruebas unitarias` → ejecuta las 27 pruebas con `unittest`.
+   - `Software FJ: generar informe PDF` → regenera `informe.pdf` (requiere `reportlab`).
+5. También puedes usar `Ctrl+Shift+B` para la tarea *Ejecutar simulación*, o la pestaña
+   **Test Explorer** para ver las pruebas.
+
+En **Visual Studio completo** (no Code): instala la carga de trabajo *Desarrollo con Python*,
+abre la carpeta, establece `main.py` como elemento de inicio y pulsa **F5**.
+El intérprete debe ser Python 3.8 o superior.
+
 ## Estructura
 
 | Archivo | Responsabilidad |

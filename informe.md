@@ -56,6 +56,7 @@ Estructura del repositorio:
 | `gestion.py` | Clase `SistemaGestion`: listas internas, altas, búsquedas y estados |
 | `reservas.py` | Clase `Reserva` y enum `EstadoReserva` |
 | `pruebas.py` | 27 pruebas automatizadas con `unittest` |
+| `.vscode/` | Configuración para ejecutar y depurar en Visual Studio Code |
 | `logs/sistema.log` | Registro de eventos y errores generado en la ejecución |
 | `ejecutar.bat` / `ejecutar_menu.bat` | Lanzadores para Windows |
 | `README.md` | Documentación general, orden de ejecución y tabla de integrantes |

@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Ejecutar simulación",
+      "type": "process",
+      "command": "py",
+      "args": ["main.py"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ejecutar menú interactivo",
+      "type": "process",
+      "command": "py",
+      "args": ["menu.py"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Ejecutar pruebas unitarias",
+      "type": "process",
+      "command": "py",
+      "args": ["-m", "unittest", "-v", "pruebas"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

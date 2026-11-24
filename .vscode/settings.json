@@ -1,0 +1,17 @@
+{
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "[python]": {
+    "editor.rulers": [88]
+  },
+  "python.testing.unittestEnabled": true,
+  "python.testing.unittestArgs": [
+    "-v",
+    "-s",
+    ".",
+    "-p",
+    "pruebas.py"
+  ],
+  "python.testing.pytestEnabled": false,
+  "python.terminal.activateEnvironment": true
+}

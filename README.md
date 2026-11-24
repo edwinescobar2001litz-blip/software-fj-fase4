@@ -45,7 +45,7 @@ También puede ejecutarse `py -3 -m unittest -v pruebas` para el detalle de las 
 | `gestion.py` | `SistemaGestion`: listas privadas, altas, búsquedas y cambios de estado |
 | `reservas.py` | Clase `Reserva`, enum `EstadoReserva` y transiciones controladas |
 | `pruebas.py` | Pruebas `unittest` de los casos válidos y de los 8 fallos corregidos |
-| `main.py` | Simulación secuencial de 21 operaciones |
+| `main.py` | Simulación secuencial de 24 operaciones |
 | `menu.py` | Interfaz interactiva de consola |
 | `informe.md` / `informe.pdf` | Documento de entrega de la Fase 4 |
 

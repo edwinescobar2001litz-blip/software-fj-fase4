@@ -2233,3 +2233,462 @@ excepciones.ServicioNoDisponibleError: El servicio Asesoría Especializada no es
 2026-11-23 23:29:14 | INFO | SoftwareFJ | Intento de confirmación finalizado: RES-001
 2026-11-23 23:29:14 | INFO | SoftwareFJ | Reserva procesada: RES-001 | $170.0
 2026-11-23 23:29:14 | INFO | SoftwareFJ | Intento de procesamiento finalizado: RES-001
+2026-11-23 23:40:31 | INFO | SoftwareFJ | ===== INICIO DE SIMULACIÓN SOFTWARE FJ =====
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Servicio creado: Asesoría Especializada (ASE-01)
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Cliente creado: Ana Pérez (CLI-001)
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Op 1 exitosa: Cliente Ana Pérez – ana@softfj.com
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 2 [Cliente con correo inválido] | DatosInvalidosError: Correo inválido: correo-mal
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 61, in <lambda>
+    ejecutar_operacion(2, "Cliente con correo inválido", lambda: sistema.registrar_cliente(
+                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        "CLI-002", "Luis Gómez", "correo-mal", "3009876543"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 77, in registrar_cliente
+    cliente = Cliente(id_cliente, nombre, correo, telefono)
+  File "C:\Users\edwin\software-fj-fase4\entidades.py", line 56, in __init__
+    self.correo = correo
+    ^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\entidades.py", line 82, in correo
+    raise DatosInvalidosError(f"Correo inválido: {correo}")
+excepciones.DatosInvalidosError: Correo inválido: correo-mal
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 3 [Cliente con nombre corto] | DatosInvalidosError: El nombre debe tener al menos 3 caracteres
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 64, in <lambda>
+    ejecutar_operacion(3, "Cliente con nombre corto", lambda: sistema.registrar_cliente(
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        "CLI-004", "Jo", "jo@softfj.com", "3011111111"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 77, in registrar_cliente
+    cliente = Cliente(id_cliente, nombre, correo, telefono)
+  File "C:\Users\edwin\software-fj-fase4\entidades.py", line 55, in __init__
+    self.nombre = nombre
+    ^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\entidades.py", line 70, in nombre
+    self._nombre = validar_texto(valor, "El nombre", minimo=3)
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\validadores.py", line 47, in validar_texto
+    raise DatosInvalidosError(
+        f"{nombre} debe tener al menos {minimo} caracteres"
+    )
+excepciones.DatosInvalidosError: El nombre debe tener al menos 3 caracteres
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Cliente creado: María López (CLI-003)
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Op 4 exitosa: Cliente María López – maria@softfj.com
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 5 [Cliente con ID duplicado] | IdentificadorDuplicadoError: Ya existe un cliente con identificador 'CLI-001'
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 70, in <lambda>
+    ejecutar_operacion(5, "Cliente con ID duplicado", lambda: sistema.registrar_cliente(
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        "CLI-001", "Otra Ana", "otra@softfj.com", "3001112222"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 75, in registrar_cliente
+    self._verificar_duplicado(self._clientes, id_cliente, "cliente")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 57, in _verificar_duplicado
+    raise IdentificadorDuplicadoError(
+        f"Ya existe un {tipo} con identificador '{identificador}'"
+    )
+excepciones.IdentificadorDuplicadoError: Ya existe un cliente con identificador 'CLI-001'
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 6 [Cliente con correo numérico (error de tipo encadenado)] | TipoDatoInvalidoError: El correo debe ser texto, se recibió int
+TypeError: Tipo recibido: int
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 74, in <lambda>
+    lambda: sistema.registrar_cliente(
+            ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        "CLI-005", "Carlos Ruiz", 12345, "3005556666"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 77, in registrar_cliente
+    cliente = Cliente(id_cliente, nombre, correo, telefono)
+  File "C:\Users\edwin\software-fj-fase4\entidades.py", line 56, in __init__
+    self.correo = correo
+    ^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\entidades.py", line 80, in correo
+    correo = validar_texto(valor, "El correo")
+  File "C:\Users\edwin\software-fj-fase4\validadores.py", line 37, in validar_texto
+    raise TipoDatoInvalidoError(
+        f"{nombre} debe ser texto, se recibió {type(valor).__name__}"
+    ) from TypeError(f"Tipo recibido: {type(valor).__name__}")
+excepciones.TipoDatoInvalidoError: El correo debe ser texto, se recibió int
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Servicio creado: Reserva de Sala (SAL-01)
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Op 7 exitosa: Sala para 20 personas – $50.0/h
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 8 [Servicio con tarifa inválida] | DatosInvalidosError: La tarifa base debe ser mayor que 0, se recibió -10
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 82, in <lambda>
+    ejecutar_operacion(8, "Servicio con tarifa inválida", lambda: sistema.crear_servicio(
+                                                                  ~~~~~~~~~~~~~~~~~~~~~~^
+        "equipo", "EQU-01", tipo_equipo="Laptop", tarifa_base=-10
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 94, in crear_servicio
+    servicio = FABRICAS_SERVICIO[clave](id_servicio, **datos)
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 197, in __init__
+    super().__init__(codigo, "Alquiler de Equipo", tarifa_base, disponible)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 34, in __init__
+    self._tarifa_base = validar_numero(tarifa_base, "La tarifa base", minimo=0)
+                        ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\validadores.py", line 80, in validar_numero
+    raise DatosInvalidosError(
+        f"{nombre} debe ser {operador} {minimo}, se recibió {valor}"
+    )
+excepciones.DatosInvalidosError: La tarifa base debe ser mayor que 0, se recibió -10
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Servicio creado: Reserva de Sala (SAL-02)
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 9 [Servicio con capacidad de tipo texto] | TipoDatoInvalidoError: La capacidad debe ser numérico, se recibió str
+TypeError: Tipo recibido: str
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 86, in <lambda>
+    lambda: sistema.crear_servicio(
+            ~~~~~~~~~~~~~~~~~~~~~~^
+        "sala", "SAL-02", capacidad="20"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 94, in crear_servicio
+    servicio = FABRICAS_SERVICIO[clave](id_servicio, **datos)
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 161, in __init__
+    self._capacidad = validar_entero(capacidad, "La capacidad", minimo=0)
+                      ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\validadores.py", line 89, in validar_entero
+    numero = validar_numero(valor, nombre, minimo=minimo, exclusivo=exclusivo)
+  File "C:\Users\edwin\software-fj-fase4\validadores.py", line 71, in validar_numero
+    raise TipoDatoInvalidoError(
+        f"{nombre} debe ser numérico, se recibió {type(valor).__name__}"
+    ) from TypeError(f"Tipo recibido: {type(valor).__name__}")
+excepciones.TipoDatoInvalidoError: La capacidad debe ser numérico, se recibió str
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 10 [Servicio no disponible] | ServicioNoDisponibleError: El servicio Asesoría Especializada no está disponible
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 58, in verificar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self._nombre} no está disponible"
+    )
+excepciones.ServicioNoDisponibleError: El servicio Asesoría Especializada no está disponible
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Servicio creado: Alquiler de Equipo (EQU-02)
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Servicio creado: Asesoría Especializada (ASE-02)
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Op 11 exitosa: Equipo Proyector – $80.0/h + seguro | Asesoría en Datos – $120.0/h
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva creada: RES-001 | Ana Pérez | Reserva de Sala | 3h
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Cotización SAL-01: 3h -> $170.0
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva confirmada: RES-001 | Costo: $170.0
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Intento de confirmación finalizado: RES-001
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva procesada: RES-001 | $170.0
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Intento de procesamiento finalizado: RES-001
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Op 12 exitosa: Reserva RES-001 | PROCESADA | Ana Pérez | Reserva de Sala | $170.0
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 13 [Reserva con duración inválida] | DatosInvalidosError: La duración debe ser mayor que 0, se recibió -2
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 110, in <lambda>
+    sistema.crear_reserva("RES-002", "CLI-001", "SAL-01", -2))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 112, in crear_reserva
+    reserva = Reserva(id_reserva, cliente, servicio, duracion)
+  File "C:\Users\edwin\software-fj-fase4\reservas.py", line 49, in __init__
+    self._duracion = validar_numero(duracion_horas, "La duración", minimo=0)
+                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\validadores.py", line 80, in validar_numero
+    raise DatosInvalidosError(
+        f"{nombre} debe ser {operador} {minimo}, se recibió {valor}"
+    )
+excepciones.DatosInvalidosError: La duración debe ser mayor que 0, se recibió -2
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 14 [Reserva con cliente inexistente] | EntidadNoEncontradaError: No existe el cliente con identificador 'CLI-999'
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 112, in <lambda>
+    sistema.crear_reserva("RES-003", "CLI-999", "SAL-01", 2))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 110, in crear_reserva
+    cliente = self.buscar_cliente(id_cliente)
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 119, in buscar_cliente
+    return self._buscar(self._clientes, identificador, "el cliente")
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 67, in _buscar
+    raise EntidadNoEncontradaError(
+        f"No existe {tipo} con identificador '{id_buscado}'"
+    )
+excepciones.EntidadNoEncontradaError: No existe el cliente con identificador 'CLI-999'
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva creada: RES-004 | María López | Alquiler de Equipo | 2h
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva cancelada: RES-004
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Intento de cancelación finalizado: RES-004
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Operación 'confirmar' rechazada para RES-004 | OperacionNoPermitidaError: No se puede confirmar una reserva en estado CANCELADA
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 134, in _operar_reserva
+    return getattr(reserva, accion)()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\edwin\software-fj-fase4\reservas.py", line 100, in confirmar
+    raise OperacionNoPermitidaError(
+        f"No se puede confirmar una reserva en estado {self.estado}"
+    )
+excepciones.OperacionNoPermitidaError: No se puede confirmar una reserva en estado CANCELADA
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 15 [Confirmar reserva cancelada (operación no permitida)] | OperacionNoPermitidaError: No se puede confirmar una reserva en estado CANCELADA
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 114, in <lambda>
+    lambda: confirmar_reserva_cancelada(
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sistema, "RES-004", "CLI-003", "EQU-02"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 162, in confirmar_reserva_cancelada
+    return sistema.confirmar_reserva(reserva.codigo)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 148, in confirmar_reserva
+    return self._operar_reserva("confirmar", identificador)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 134, in _operar_reserva
+    return getattr(reserva, accion)()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\edwin\software-fj-fase4\reservas.py", line 100, in confirmar
+    raise OperacionNoPermitidaError(
+        f"No se puede confirmar una reserva en estado {self.estado}"
+    )
+excepciones.OperacionNoPermitidaError: No se puede confirmar una reserva en estado CANCELADA
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva creada: RES-005 | Ana Pérez | Asesoría Especializada | 2h
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Fallo al cotizar ASE-01 | ServicioNoDisponibleError: El servicio Asesoría Especializada no está disponible
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 113, in _calcular_costo_final
+    self.verificar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 58, in verificar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self._nombre} no está disponible"
+    )
+excepciones.ServicioNoDisponibleError: El servicio Asesoría Especializada no está disponible
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Causa raíz al confirmar la reserva RES-005 | ServicioNoDisponibleError: El servicio Asesoría Especializada no está disponible
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\reservas.py", line 106, in confirmar
+    self._costo = self._servicio.costo_final(self._duracion)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\AppData\Local\Programs\Python\Python314\Lib\functools.py", line 1069, in __call__
+    return self._dispatch(args[0].__class__).__get__(self._obj, self._cls)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 143, in _
+    return self._calcular_costo_final(horas, impuesto, descuento, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 113, in _calcular_costo_final
+    self.verificar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 58, in verificar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self._nombre} no está disponible"
+    )
+excepciones.ServicioNoDisponibleError: El servicio Asesoría Especializada no está disponible
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Intento de confirmación finalizado: RES-005
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Operación 'confirmar' rechazada para RES-005 | ReservaIncorrectaError: No se pudo confirmar la reserva RES-005
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\reservas.py", line 106, in confirmar
+    self._costo = self._servicio.costo_final(self._duracion)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\AppData\Local\Programs\Python\Python314\Lib\functools.py", line 1069, in __call__
+    return self._dispatch(args[0].__class__).__get__(self._obj, self._cls)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 143, in _
+    return self._calcular_costo_final(horas, impuesto, descuento, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 113, in _calcular_costo_final
+    self.verificar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 58, in verificar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self._nombre} no está disponible"
+    )
+excepciones.ServicioNoDisponibleError: El servicio Asesoría Especializada no está disponible
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 134, in _operar_reserva
+    return getattr(reserva, accion)()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\edwin\software-fj-fase4\reservas.py", line 113, in confirmar
+    raise ReservaIncorrectaError(
+        f"No se pudo confirmar la reserva {self._codigo}"
+    ) from error
+excepciones.ReservaIncorrectaError: No se pudo confirmar la reserva RES-005
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 16 [Reserva con servicio no disponible] | ReservaIncorrectaError: No se pudo confirmar la reserva RES-005
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\reservas.py", line 106, in confirmar
+    self._costo = self._servicio.costo_final(self._duracion)
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\AppData\Local\Programs\Python\Python314\Lib\functools.py", line 1069, in __call__
+    return self._dispatch(args[0].__class__).__get__(self._obj, self._cls)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 143, in _
+    return self._calcular_costo_final(horas, impuesto, descuento, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 113, in _calcular_costo_final
+    self.verificar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 58, in verificar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self._nombre} no está disponible"
+    )
+excepciones.ServicioNoDisponibleError: El servicio Asesoría Especializada no está disponible
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 118, in <lambda>
+    sistema.confirmar_reserva(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sistema.crear_reserva(
+        ^^^^^^^^^^^^^^^^^^^^^^
+            "RES-005", "CLI-001", "ASE-01", 2
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ).codigo
+        ^^^^^^^^
+    ))
+    ^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 148, in confirmar_reserva
+    return self._operar_reserva("confirmar", identificador)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 134, in _operar_reserva
+    return getattr(reserva, accion)()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\edwin\software-fj-fase4\reservas.py", line 113, in confirmar
+    raise ReservaIncorrectaError(
+        f"No se pudo confirmar la reserva {self._codigo}"
+    ) from error
+excepciones.ReservaIncorrectaError: No se pudo confirmar la reserva RES-005
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva creada: RES-006 | María López | Asesoría Especializada | 6h
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Cotización ASE-02: 6h -> $648.0
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva confirmada: RES-006 | Costo: $648.0
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Intento de confirmación finalizado: RES-006
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Reserva procesada: RES-006 | $648.0
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Intento de procesamiento finalizado: RES-006
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Op 17 exitosa: Reserva RES-006 | PROCESADA | María López | Asesoría Especializada | $648.0
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Cotización SAL-01: 3h -> $202.3
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Op 18 exitosa: Sala 3h + IVA 19 %: $202.3
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Cotización SAL-01: 2.5h -> $130.5
+2026-11-23 23:40:31 | INFO | SoftwareFJ | Op 19 exitosa: Sala 2.5h con 10 % dto: $130.5
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 20 [Descuento fuera de rango] | DatosInvalidosError: El descuento debe estar entre 0 y 1 (0 % - 100 %), se recibió 1.5
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 135, in <lambda>
+    sala.costo_final(3, descuento=1.5))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\AppData\Local\Programs\Python\Python314\Lib\functools.py", line 1069, in __call__
+    return self._dispatch(args[0].__class__).__get__(self._obj, self._cls)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 143, in _
+    return self._calcular_costo_final(horas, impuesto, descuento, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 110, in _calcular_costo_final
+    descuento_validado = validar_porcentaje(descuento, "El descuento")
+  File "C:\Users\edwin\software-fj-fase4\validadores.py", line 104, in validar_porcentaje
+    raise DatosInvalidosError(
+        f"{nombre} debe estar entre 0 y 1 (0 % - 100 %), se recibió {numero}"
+    )
+excepciones.DatosInvalidosError: El descuento debe estar entre 0 y 1 (0 % - 100 %), se recibió 1.5
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 21 [Error imprevisto (división por cero simulada)] INESPERADO | ZeroDivisionError: division by zero
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 137, in <lambda>
+    lambda: 10 / 0)
+            ~~~^~~
+ZeroDivisionError: division by zero
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 22 [Parámetros faltantes al crear servicio] | ParametroFaltanteError: Faltan parámetros para crear un servicio 'equipo': AlquilerEquipo.__init__() missing 1 required positional argument: 'tipo_equipo'
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 94, in crear_servicio
+    servicio = FABRICAS_SERVICIO[clave](id_servicio, **datos)
+TypeError: AlquilerEquipo.__init__() missing 1 required positional argument: 'tipo_equipo'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 142, in <lambda>
+    sistema.crear_servicio("equipo", "EQU-03"))
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\gestion.py", line 98, in crear_servicio
+    raise ParametroFaltanteError(
+        f"Faltan parámetros para crear un servicio '{clave}': {error}"
+    ) from error
+excepciones.ParametroFaltanteError: Faltan parámetros para crear un servicio 'equipo': AlquilerEquipo.__init__() missing 1 required positional argument: 'tipo_equipo'
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 23 [Validación polimórfica: asistentes > capacidad] | DatosInvalidosError: La sala admite 20 asistentes, se solicitaron 25
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 144, in <lambda>
+    sala.costo_final(2, asistentes=25))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\AppData\Local\Programs\Python\Python314\Lib\functools.py", line 1069, in __call__
+    return self._dispatch(args[0].__class__).__get__(self._obj, self._cls)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 143, in _
+    return self._calcular_costo_final(horas, impuesto, descuento, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 107, in _calcular_costo_final
+    parametros = self.validar_parametros(horas, **kwargs)
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 180, in validar_parametros
+    raise DatosInvalidosError(
+    ...<2 lines>...
+    )
+excepciones.DatosInvalidosError: La sala admite 20 asistentes, se solicitaron 25
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Fallo al cotizar ASE-02 | CalculoInconsistenteError: Cálculo inconsistente en Asesoría Especializada: 0.0
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 116, in _calcular_costo_final
+    self._validar_total(total)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 98, in _validar_total
+    raise CalculoInconsistenteError(
+        f"Cálculo inconsistente en {self._nombre}: {numero}"
+    )
+excepciones.CalculoInconsistenteError: Cálculo inconsistente en Asesoría Especializada: 0.0
+2026-11-23 23:40:31 | ERROR | SoftwareFJ | Op 24 [Cálculo inconsistente (descuento del 100 %)] | CalculoInconsistenteError: Cálculo inconsistente en Asesoría Especializada: 0.0
+Traceback (most recent call last):
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 21, in ejecutar_operacion
+    resultado = funcion()
+  File "C:\Users\edwin\software-fj-fase4\main.py", line 146, in <lambda>
+    asesoria.costo_final(6, descuento=1.0))
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\AppData\Local\Programs\Python\Python314\Lib\functools.py", line 1069, in __call__
+    return self._dispatch(args[0].__class__).__get__(self._obj, self._cls)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 143, in _
+    return self._calcular_costo_final(horas, impuesto, descuento, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 116, in _calcular_costo_final
+    self._validar_total(total)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\edwin\software-fj-fase4\servicios.py", line 98, in _validar_total
+    raise CalculoInconsistenteError(
+        f"Cálculo inconsistente en {self._nombre}: {numero}"
+    )
+excepciones.CalculoInconsistenteError: Cálculo inconsistente en Asesoría Especializada: 0.0
+2026-11-23 23:40:31 | INFO | SoftwareFJ | ===== FIN DE SIMULACIÓN SOFTWARE FJ =====
